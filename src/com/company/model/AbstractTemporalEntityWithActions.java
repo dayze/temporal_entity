@@ -22,6 +22,7 @@ public class AbstractTemporalEntityWithActions extends AbstractTemporalEntity {
                 actionsPerformed += action + " ";
             }
         }
+        System.out.println(actionsPerformed);
         fireChanges();
     }
 
