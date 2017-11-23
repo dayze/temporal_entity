@@ -1,5 +1,8 @@
 package com.company.model;
 
-public interface InterfaceTemporalEntity { //todo implements listenableModel
+public interface InterfaceTemporalEntity extends ListenableModel { //todo implements listenableModel
+    long getStartTime();
+    long getEndtime();
+    void setCurrentTime(long l);
 
 }

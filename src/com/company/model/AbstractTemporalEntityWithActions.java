@@ -1,4 +1,7 @@
-package com.company;
+package com.company.model;
+
+import com.company.Action;
+import com.company.model.AbstractTemporalEntity;
 
 import java.util.ArrayList;
 
