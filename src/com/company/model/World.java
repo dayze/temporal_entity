@@ -59,7 +59,7 @@ public class World extends AbstractListenableModel {
         boolean change2 = false;
         if (temporalEntity.getStartTime() != startTime) {
             for (TemporalEntity entity : entities) {
-                change2 = synchronizeStartTime(entity);
+                change1 = synchronizeStartTime(entity);
             }
         }
         if (temporalEntity.getEndtime() != endTime) {
