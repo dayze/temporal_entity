@@ -30,7 +30,7 @@ public class World extends AbstractListenableModel {
     }
 
     public boolean synchronizeStartTime(TemporalEntity temporalEntity) {
-        if (temporalEntity.getStartTime() < startTime) {
+        if (startTime == -1 || temporalEntity.getStartTime() < startTime) {
             startTime = temporalEntity.getStartTime();
             return true;
         }
@@ -38,7 +38,7 @@ public class World extends AbstractListenableModel {
     }
 
     public boolean synchronizeEndTime(TemporalEntity temporalEntity) {
-        if (temporalEntity.getEndtime() > endTime) {
+        if (endTime == -1 || temporalEntity.getEndtime() > endTime) {
             endTime = temporalEntity.getEndtime();
             return true;
         }
