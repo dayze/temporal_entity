@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class AbstractTemporalEntity extends AbstractListenableModel implements TemporalEntity {
+public abstract class AbstractTemporalEntity extends AbstractListenableModel implements TemporalEntity {
 
     private long startTime;
     private long endTime;
@@ -34,5 +34,8 @@ public class AbstractTemporalEntity extends AbstractListenableModel implements T
     @Override
     public void setCurrentTime(long l) {
         this.currentTime = l;
+        update();
     }
+
+    abstract void update();
 }

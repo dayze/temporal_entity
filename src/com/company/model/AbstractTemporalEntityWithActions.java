@@ -15,7 +15,7 @@ public class AbstractTemporalEntityWithActions extends AbstractTemporalEntity {
         actionsPerformed = "";
     }
 
-    public void doSomething() {
+    public void update() {
         actionsPerformed = "";
         for (Action action : actions) {
             if (action.getStartTime() <= currentTime && currentTime <= action.getEndTime()) {

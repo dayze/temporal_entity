@@ -27,6 +27,10 @@ public class World extends AbstractListenableModel {
 
     public void setCurrentTime(long currentTime) {
         this.currentTime = currentTime;
+        for (TemporalEntity temporalEntity : entities) {
+            temporalEntity.setCurrentTime(currentTime);
+        }
+        fireChanges();
     }
 
     public boolean synchronizeStartTime(TemporalEntity temporalEntity) {

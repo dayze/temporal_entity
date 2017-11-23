@@ -12,7 +12,7 @@ public class Main {
         long timestamp = new Date().getTime();
 
         ArrayList<Action> actions = new ArrayList<>();
-        actions.add(new Action(timestamp - 100, timestamp,"Brouter"));
+        actions.add(new Action(150, 170,"Brouter"));
 
         //Pokemon chenipan = new Pokemon("Pote", timestamp - 10000, timestamp, actions);
         Pokemon chenipan = new Pokemon("Pote", 100, 200, actions);
