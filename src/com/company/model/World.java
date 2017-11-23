@@ -46,28 +46,29 @@ public class World extends AbstractListenableModel {
     }
 
     public void addEntity(TemporalEntity temporalEntity) {
-        boolean change = synchronizeStartTime(temporalEntity);
-        change = change || synchronizeEndTime(temporalEntity);
+        boolean change1 = synchronizeStartTime(temporalEntity);
+        boolean change2 = synchronizeEndTime(temporalEntity);
         entities.add(temporalEntity);
-        if (change) {
+        if (change1 || change2) {
             fireChanges();
         }
     }
 
     public void removeEntity(TemporalEntity temporalEntity) {
-        boolean change = false;
+        boolean change1 = false;
+        boolean change2 = false;
         if (temporalEntity.getStartTime() != startTime) {
             for (TemporalEntity entity : entities) {
-                change = change || synchronizeStartTime(entity);
+                change2 = synchronizeStartTime(entity);
             }
         }
         if (temporalEntity.getEndtime() != endTime) {
             for (TemporalEntity entity : entities) {
-                change = change || synchronizeEndTime(entity);
+                change2 = synchronizeEndTime(entity);
             }
         }
         entities.remove(temporalEntity);
-        if (change) {
+        if (change1 || change2) {
             fireChanges();
         }
     }
