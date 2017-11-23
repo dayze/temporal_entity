@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class AbstractTemporalEntity extends AbstractListenableModel implements InterfaceTemporalEntity {
+public class AbstractTemporalEntity extends AbstractListenableModel implements TemporalEntity {
 
     private long startTime;
     private long endTime;
