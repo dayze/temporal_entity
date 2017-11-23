@@ -4,7 +4,7 @@ public class AbstractTemporalEntity extends AbstractListenableModel implements T
 
     private long startTime;
     private long endTime;
-    private long currentTime;
+    protected long currentTime;
 
     public AbstractTemporalEntity (long startTime, long endTime) {
         this.startTime = startTime;
