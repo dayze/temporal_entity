@@ -14,7 +14,8 @@ public class Main {
         ArrayList<Action> actions = new ArrayList<>();
         actions.add(new Action(timestamp - 100, timestamp,"Brouter"));
 
-        Pokemon chenipan = new Pokemon("Pote", timestamp - 10000, timestamp, actions);
+        //Pokemon chenipan = new Pokemon("Pote", timestamp - 10000, timestamp, actions);
+        Pokemon chenipan = new Pokemon("Pote", 100, 200, actions);
 
         World world = new World();
         world.addEntity(chenipan);

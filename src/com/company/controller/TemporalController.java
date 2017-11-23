@@ -11,6 +11,9 @@ import java.awt.*;
 
 public class TemporalController extends JFrame implements ModelListener, ChangeListener {
 
+    private final int SLIDER_MIN = 0;
+    private final int SLIDER_MAX = 2000;
+
     private World world;
     private JSlider slider;
 
@@ -19,7 +22,7 @@ public class TemporalController extends JFrame implements ModelListener, ChangeL
         this.world = world;
         this.world.addListener(this);
 
-        slider = new JSlider(JSlider.HORIZONTAL, 0, 2000, 0);
+        slider = new JSlider(JSlider.HORIZONTAL, SLIDER_MIN, SLIDER_MAX, 0);
         slider.addChangeListener(this);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -41,7 +44,7 @@ public class TemporalController extends JFrame implements ModelListener, ChangeL
     @Override
     public void stateChanged(ChangeEvent e) {
         if (slider == (JSlider) e.getSource()) {
-            System.out.println(slider.getValue());
+            world.setCurrentTime((((slider.getValue() - SLIDER_MIN) * (world.getEndTime() - world.getStartTime())) / (SLIDER_MAX - SLIDER_MIN)) + world.getStartTime());
         }
     }
 }
