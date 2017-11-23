@@ -3,15 +3,14 @@ package com.company.model;
 import java.util.ArrayList;
 
 public class World extends AbstractListenableModel {
-    private long startTime;
-    private long endTime;
-    private long currentTime;
+
+    public final static long UNDEFINED = -1;
+    private long startTime, endTime, currentTime;
     private ArrayList<TemporalEntity> entities;
 
     public World() {
-        startTime = 0;
-        endTime = 0;
-        entities = new ArrayList<TemporalEntity>();
+        startTime = endTime = currentTime = UNDEFINED;
+        entities = new ArrayList<>();
     }
 
     public long getStartTime() {
@@ -30,16 +29,25 @@ public class World extends AbstractListenableModel {
         this.currentTime = currentTime;
     }
 
-    public void addEntity(TemporalEntity temporalEntity) {
-        boolean change = false;
+    public boolean synchronizeStartTime(TemporalEntity temporalEntity) {
         if (temporalEntity.getStartTime() < startTime) {
             startTime = temporalEntity.getStartTime();
-            change = true;
+            return true;
         }
+        return false;
+    }
+
+    public boolean synchronizeEndTime(TemporalEntity temporalEntity) {
         if (temporalEntity.getEndtime() > endTime) {
             endTime = temporalEntity.getEndtime();
-            change = true;
+            return true;
         }
+        return false;
+    }
+
+    public void addEntity(TemporalEntity temporalEntity) {
+        boolean change = synchronizeStartTime(temporalEntity);
+        change = change || synchronizeEndTime(temporalEntity);
         entities.add(temporalEntity);
         if (change) {
             fireChanges();
@@ -47,6 +55,20 @@ public class World extends AbstractListenableModel {
     }
 
     public void removeEntity(TemporalEntity temporalEntity) {
+        boolean change = false;
+        if (temporalEntity.getStartTime() != startTime) {
+            for (TemporalEntity entity : entities) {
+                change = change || synchronizeStartTime(entity);
+            }
+        }
+        if (temporalEntity.getEndtime() != endTime) {
+            for (TemporalEntity entity : entities) {
+                change = change || synchronizeEndTime(entity);
+            }
+        }
         entities.remove(temporalEntity);
+        if (change) {
+            fireChanges();
+        }
     }
 }
