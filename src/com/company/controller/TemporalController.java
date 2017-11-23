@@ -5,9 +5,11 @@ import com.company.model.ModelListener;
 import com.company.model.World;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class TemporalController extends JFrame implements ModelListener {
+public class TemporalController extends JFrame implements ModelListener, ChangeListener {
 
     private World world;
     private JSlider slider;
@@ -15,7 +17,10 @@ public class TemporalController extends JFrame implements ModelListener {
     public TemporalController(World world) {
         super("Le java c'est trop génial !");
         this.world = world;
-        slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        this.world.addListener(this);
+
+        slider = new JSlider(JSlider.HORIZONTAL, 0, 2000, 0);
+        slider.addChangeListener(this);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new MyWindowListener(this));
@@ -24,12 +29,19 @@ public class TemporalController extends JFrame implements ModelListener {
         add(slider, BorderLayout.NORTH);
 
         this.pack();
-        this.setSize(new Dimension(1400, 700));
+        this.setSize(new Dimension(1000, 500));
         this.setVisible(true);
     }
 
     @Override
     public void updateModel(Object o) {
 
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        if (slider == (JSlider) e.getSource()) {
+            System.out.println(slider.getValue());
+        }
     }
 }
