@@ -28,7 +28,7 @@ public class AbstractTemporalEntity extends AbstractListenableModel implements T
 
     @Override
     public long getEndtime() {
-        return this.getEndtime();
+        return this.endTime;
     }
 
     @Override
